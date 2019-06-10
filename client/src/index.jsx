@@ -21,9 +21,9 @@ class Reviews extends React.Component {
 
   componentDidMount() { 
     // axios.get('api/oneReview', { 
-    axios.get('http://review.us-east-2.elasticbeanstalk.com/api/oneReview', { 
+    axios.get('/oneReview', { 
       params: { 
-        uuid: 1001
+        id: 1
       }
     })
     .then(reviews => { 
@@ -32,7 +32,8 @@ class Reviews extends React.Component {
       reviews.data.sort(compareReviewRating); 
       // console.log(reviews.data);
       
-      console.log(getAvgRating(reviews.data));
+      // console.log(getAvgRating(reviews.data));
+      console.log(reviews);
       
       this.setState({ 
         reviews: reviews.data, 
@@ -45,7 +46,7 @@ class Reviews extends React.Component {
 
   componentDidUpdate(prevProps, prevState) { 
     if (this.props.uuid !== prevProps.uuid) { 
-      axios.get('http://review.us-east-2.elasticbeanstalk.com/api/oneReview', { 
+      axios.get('/oneReview', { 
         params: { 
           uuid: this.props.uuid
         }
