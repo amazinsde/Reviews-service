@@ -1,20 +1,28 @@
-require('dotenv').config(); 
+// require('dotenv').config(); 
 
-const knex = require('knex')({
-  client: 'pg',
-  connection: process.env.DATABASE_URL
-});
+// const knex = require('knex')({
+//   client: 'pg',
+//   connection: process.env.DATABASE_URL
+// });
 
-const getReview =  (reviewId) => {
-  return knex('reviews').join('body', 'reviews.revBody_id', 'body.id').select().where({'reviews.id' : reviewId })
-   .catch(err => {
-     console.log('there is an error', err)
-   })
-}
+// const getReview =  (reviewId) => {
+//   return knex('reviews').join('body', 'reviews.revBody_id', 'body.id').select().where({'reviews.id' : reviewId })
+//    .catch(err => {
+//      console.log('there is an error', err)
+//    })
+// }
 
 // const createReview = () => {
-
+//   await knex('body')
+//       .insert(createFakeBody())
+//       .returning('id')
+//       .then(function(response) {
+//         return knex('reviews')
+//          .insert(createFakeReviews(response[0]));
+//   })
 // }
+
+
 
 // const updateReview = () => {
 
@@ -39,12 +47,12 @@ const getReview =  (reviewId) => {
 //                 });
 //         });
 
-module.exports = {
-  getReview: getReview,
-  // createReview: createReview,
-  // updateReview: updateReview,
-  // deleteReview: deleteReview,
-}
+// module.exports = {
+//   getReview: getReview,
+//   // createReview: createReview,
+//   // updateReview: updateReview,
+//   // deleteReview: deleteReview,
+// }
 
 // const knex = require('knex')({ 
 //   client: 'pg', 

@@ -3,9 +3,10 @@ import { convertDate } from '../helpers/helperFuncs';
 import StarRatings from 'react-star-ratings'; 
 import styles from '../../public/Reviews.css'
 
-const  EachReview = ({ review }) => { 
-  review.formattedDate = convertDate(review.revDate); 
-  
+const  EachReview = ({ review = {} }) => { 
+  // review.formattedDate = convertDate(review.revDate); 
+  // console.log(review.revDate, 'hello');
+  // console.log(review.revBody_id, 'review two');
 
   return (
   <div className={styles.EachReview}>
@@ -23,7 +24,7 @@ const  EachReview = ({ review }) => {
         starSpacing='0px'
       /><span className={styles.revTitle}> {review.revTitle} </span>
     </div>
-    <div className={styles.revDate}> {review.formattedDate} </div>
+    {/* <div className={styles.revDate}> {review.formattedDate} </div> */}
     <p className={styles.revBody}> {review.revBody} </p>
   </div >);
 }; 

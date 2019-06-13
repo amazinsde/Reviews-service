@@ -16,17 +16,12 @@ const createFakeReviews = (id) => ({
     id: id,
     revTitle: faker.lorem.sentence(),
     revName: faker.name.findName(),
-    revBody_id: faker.lorem.paragraph(),
+    revBody:  faker.lorem.paragraph(),
     revDate: faker.date.past(),
     stars: Math.floor(Math.random() * 6)
 });
 
 const Review = mongoose.model('reviews', schema);
-
-// const records = [
-//     {id: 'Bob',  revTitle: 'French, English', revName:},
-//     {name: 'Mary', lang: 'English'}
-// ];
 
 const createReviewMongo = async () => {
     let idNumber = 9000001;
@@ -56,14 +51,28 @@ let createMongoosePromise = (id) => {
   });
 }
 
+let getReviewsMongoDb = (id, callback) => {
+  Review.findOne({id: id}, (err, review) => {
+      if(err) {
+        callback(err);
+        console.log('there is an error');
+      } else {
+        callback(null, review);
+        console.log('succesful FIND in mongoose');
+      }
+  })
+}
 
 
 
 
-createReviewMongo();
+
+// createReviewMongo();
 
 
-
+module.exports = {
+  getReviewsMongoDb : getReviewsMongoDb,
+}
 
 // Review.create(createFakeReviews(idNumber), (err) => {
 //     if(err) {

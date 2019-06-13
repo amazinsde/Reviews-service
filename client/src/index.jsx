@@ -19,26 +19,29 @@ class Reviews extends React.Component {
     this.handleChange = this.handleChange.bind(this);
   } 
 
+  // , { 
+  //   params: { 
+  //     id: 2
+  //   }
+
   componentDidMount() { 
     // axios.get('api/oneReview', { 
-    axios.get('/oneReview', { 
-      params: { 
-        id: 1
-      }
-    })
+    axios.get(`/oneReview/${2}`)
     .then(reviews => { 
       // console.log(`reviews procured db!`, reviews.data[0].uuid) 
       // set default sort of topreviews.
-      reviews.data.sort(compareReviewRating); 
+      // reviews.data.sort(compareReviewRating); 
       // console.log(reviews.data);
       
       // console.log(getAvgRating(reviews.data));
-      console.log(reviews);
-      
-      this.setState({ 
-        reviews: reviews.data, 
-        uuid: reviews.data[0].uuid, 
-        averageRating: getAvgRating(reviews.data)
+     
+      // console.log(reviews.data, 'review . data');
+
+      this.setState({
+        reviews: this.state.reviews.concat(reviews),
+        // uuid: reviews.data.id,
+        // averageRating: getAvgRating([reviews.data])
+
       })
     })
     .catch(err => console.log(`error retrieving reviews`))
@@ -68,7 +71,7 @@ class Reviews extends React.Component {
     if ( e.target.value === 'Most Recent') { 
       let mostRecentRevs = [].concat(this.state.reviews)
       mostRecentRevs.sort((a,b)=> new Date(b.revDate).getTime() - new Date(a.revDate).getTime());
-      console.log(mostRecentRevs);
+      // console.log(mostRecentRevs);
       this.setState({ 
         reviews: mostRecentRevs
       });
@@ -83,6 +86,7 @@ class Reviews extends React.Component {
 
   render(){  
     const { reviews, averageRating } = this.state; 
+    // console.log(reviews, 'reviews before render, hi');
 
     return ( 
       <>
@@ -101,7 +105,7 @@ class Reviews extends React.Component {
                 </select>
               </form>
             </div>
-              { reviews.map((review, i) => <EachReview key={i} review={ review } /> )}
+              { reviews.map((review, i) => <EachReview key={i} review={review.data} /> )}
         </div>
       </div>
       </>
