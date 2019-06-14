@@ -19,30 +19,30 @@ app.use(bodyParser.urlencoded({ extended: true }))
 //   res.send(`Hiiiiiiiiiiii`) 
 // })
 
-app.get('/oneReview/:id', (req, res) => {
-  const reviewId = parseInt(req.params.id);
-  dbMongo.getReviewsMongoDb(reviewId, (err, reviews) => {
-    if(err) {
-      console.log('ERROR IN SERVER', err);
-    } else {
-      console.log('Response in server with MONGO', reviews) 
-      res.send(reviews);     
-    }
-  })
-});
-
-
-// app.get('/oneReview', (req, res) => { 
-//   const reviewId = req.query.id;
-//   console.log('here is the reviewId', reviewId)
-//   // console.log(reviewUUID, `log on server side`)
-//   db.getReview(reviewId) 
-//   // console.log(reviewUUID) 
-//     .then(reviews => { 
-//       res.send(reviews)
-//       // console.log(reviews, `reviews on server`)
-//     })
-//     .catch(err => console.log(err, `err retrieving reviews`))
+// app.get('/oneReview/:id', (req, res) => {
+//   const reviewId = parseInt(req.params.id);
+//   dbMongo.getReviewsMongoDb(reviewId, (err, reviews) => {
+//     if(err) {
+//       console.log('ERROR IN SERVER', err);
+//     } else {
+//       console.log('Response in server with MONGO', reviews) 
+//       res.send(reviews);     
+//     }
+//   })
 // });
+
+
+app.get('/oneReview/:id', (req, res) => { 
+  const reviewId = req.params.id;
+  console.log('here is the reviewId', reviewId)
+  // console.log(reviewUUID, `log on server side`)
+  db.getReview(reviewId) 
+  // console.log(reviewUUID) 
+    .then(reviews => { 
+      res.send(reviews)
+      // console.log(reviews, `reviews on server`)
+    })
+    .catch(err => console.log(err, `err retrieving reviews`))
+});
 
 app.listen(port, () => { console.log(`listening at port ${port}`)});

@@ -36,12 +36,11 @@ class Reviews extends React.Component {
       // console.log(getAvgRating(reviews.data));
      
       // console.log(reviews.data, 'review . data');
-
+      console.log(reviews.data);
       this.setState({
-        reviews: this.state.reviews.concat(reviews),
-        // uuid: reviews.data.id,
-        // averageRating: getAvgRating([reviews.data])
-
+        reviews: reviews.data, 
+        uuid: reviews.data[0].uuid, 
+        averageRating: getAvgRating(reviews.data),
       })
     })
     .catch(err => console.log(`error retrieving reviews`))
@@ -86,7 +85,7 @@ class Reviews extends React.Component {
 
   render(){  
     const { reviews, averageRating } = this.state; 
-    // console.log(reviews, 'reviews before render, hi');
+    // npm install newrelic
 
     return ( 
       <>
@@ -105,7 +104,7 @@ class Reviews extends React.Component {
                 </select>
               </form>
             </div>
-              { reviews.map((review, i) => <EachReview key={i} review={review.data} /> )}
+              { reviews.map((review, i) => <EachReview key={i} review={review} /> )}
         </div>
       </div>
       </>
